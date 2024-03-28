@@ -6,6 +6,24 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface ChatComponent {
+        /**
+          * The Chat identifier
+         */
+        "chatUid"?: string;
+        /**
+          * The greetings
+         */
+        "greetings": string;
+        /**
+          * The Agent identifier
+         */
+        "identifier": string;
+        /**
+          * The language
+         */
+        "language"?: string;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -21,7 +39,29 @@ export namespace Components {
         "middle": string;
     }
 }
+export interface ChatComponentCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLChatComponentElement;
+}
 declare global {
+    interface HTMLChatComponentElementEventMap {
+        "send": any;
+        "receiver": any;
+    }
+    interface HTMLChatComponentElement extends Components.ChatComponent, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLChatComponentElementEventMap>(type: K, listener: (this: HTMLChatComponentElement, ev: ChatComponentCustomEvent<HTMLChatComponentElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLChatComponentElementEventMap>(type: K, listener: (this: HTMLChatComponentElement, ev: ChatComponentCustomEvent<HTMLChatComponentElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLChatComponentElement: {
+        prototype: HTMLChatComponentElement;
+        new (): HTMLChatComponentElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -29,10 +69,31 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "chat-component": HTMLChatComponentElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface ChatComponent {
+        /**
+          * The Chat identifier
+         */
+        "chatUid"?: string;
+        /**
+          * The greetings
+         */
+        "greetings"?: string;
+        /**
+          * The Agent identifier
+         */
+        "identifier"?: string;
+        /**
+          * The language
+         */
+        "language"?: string;
+        "onReceiver"?: (event: ChatComponentCustomEvent<any>) => void;
+        "onSend"?: (event: ChatComponentCustomEvent<any>) => void;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -48,6 +109,7 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface IntrinsicElements {
+        "chat-component": ChatComponent;
         "my-component": MyComponent;
     }
 }
@@ -55,6 +117,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "chat-component": LocalJSX.ChatComponent & JSXBase.HTMLAttributes<HTMLChatComponentElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
