@@ -1,8 +1,9 @@
 {
   "name": "ai-enterprise-chat-component",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "description": "About AI Agent Chat provides a Web Component for integrating chat into your website.",
   "main": "dist/index.cjs.js",
+  "exports": "./dist/esm/ai-enterprise-chat-component.js",
   "module": "dist/index.js",
   "es2015": "dist/esm/index.js",
   "es2017": "dist/esm/index.js",

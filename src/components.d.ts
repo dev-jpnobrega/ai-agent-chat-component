@@ -24,20 +24,6 @@ export namespace Components {
          */
         "language"?: string;
     }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
-    }
 }
 export interface ChatComponentCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -62,15 +48,8 @@ declare global {
         prototype: HTMLChatComponentElement;
         new (): HTMLChatComponentElement;
     };
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
-    }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
-    };
     interface HTMLElementTagNameMap {
         "chat-component": HTMLChatComponentElement;
-        "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
@@ -94,23 +73,8 @@ declare namespace LocalJSX {
         "onReceiver"?: (event: ChatComponentCustomEvent<any>) => void;
         "onSend"?: (event: ChatComponentCustomEvent<any>) => void;
     }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
-    }
     interface IntrinsicElements {
         "chat-component": ChatComponent;
-        "my-component": MyComponent;
     }
 }
 export { LocalJSX as JSX };
@@ -118,7 +82,6 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "chat-component": LocalJSX.ChatComponent & JSXBase.HTMLAttributes<HTMLChatComponentElement>;
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
 }
