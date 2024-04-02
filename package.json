@@ -13,7 +13,7 @@
   "unpkg": "dist/ai-enterprise-chat-component/ai-enterprise-chat-component.esm.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/stencil-component-starter.git"
+    "url": "https://github.com/dev-jpnobrega/ai-agent-chat-component.git"
   },
   "files": [
     "dist/",
@@ -37,5 +37,5 @@
     "jest-cli": "^29.7.0",
     "puppeteer": "^21.9.0"
   },
-  "license": "MIT"
+  "license": "Apache-2.0"
 }

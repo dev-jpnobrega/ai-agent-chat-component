@@ -226,8 +226,8 @@ export class ChatComponent {
       <div>
       <div class='chat'>
         <div class='chat-title'>
-          <h1>GSP Ada</h1>
-          <h2>BOT Global Sales Plataform</h2>
+          <h1>BOT Lua</h1>
+          <h2>Atendimento Global</h2>
           <figure class='avatar'>
             <img src='https://cloudfronttestebucket.s3.amazonaws.com/agent.jpg' />
           </figure>
