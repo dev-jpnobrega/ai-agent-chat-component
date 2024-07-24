@@ -223,7 +223,6 @@ export class ChatComponent {
 
   render() {
     return (
-      <div>
       <div class='chat'>
         <div class='chat-title'>
           <h1>BOT Lua</h1>
@@ -247,8 +246,6 @@ export class ChatComponent {
             { (this.translations) ? this.translations['button?.send'] : 'Enviar' }
           </button>
         </div>
-      </div> 
-      <div class="bg"></div>
       </div>
     )
   }
