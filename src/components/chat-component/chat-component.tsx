@@ -241,10 +241,10 @@ export class ChatComponent {
             value={ this.content }
             onInput={ (event) => this.handleChange(event) } 
             class='message-input' 
-            placeholder={ this.translations['text?.placeholder'] || 'Digite sua mensagem ...' }>
+            placeholder={ (this.translations) ? this.translations['text?.placeholder'] : 'Digite sua mensagem ...' }>
           </textarea>
           <button disabled={this.disableSend} type='submit' class='message-submit' onClick={ (e) => this.handleSend(e) }>
-            { this.translations['button?.send'] || 'Enviar' }
+            { (this.translations) ? this.translations['button?.send'] : 'Enviar' }
           </button>
         </div>
       </div> 

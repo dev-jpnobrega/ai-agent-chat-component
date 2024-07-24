@@ -16,6 +16,8 @@ class TranslationUtils {
 			}
 		} catch (exception) {
 			console.error(`Error loading locale: ${lang}`, exception);
+
+      return undefined;
 		}
 	}
 }

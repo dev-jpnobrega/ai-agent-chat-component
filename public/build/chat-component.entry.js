@@ -140,6 +140,7 @@ class TranslationUtils {
         }
         catch (exception) {
             console.error(`Error loading locale: ${lang}`, exception);
+            return undefined;
         }
     }
 }
@@ -276,7 +277,7 @@ const ChatComponent = class {
         }
     }
     render() {
-        return (h("div", { key: 'd085f63587c980ac8fe67f61aa6bc5a149625934' }, h("div", { key: '8c8697ff0a6b5875ec0d53421ed0c167e5b2701e', class: 'chat' }, h("div", { key: 'fbaa4b76fb5c07c92fd298993d387f124544195b', class: 'chat-title' }, h("h1", { key: '35133c0b8172e0ae9c85170af445f7b8e7b99b93' }, "BOT Lua"), h("h2", { key: '926b8218e5cdab32b2cbb2a55b77089d164553fb' }, "Atendimento Global"), h("figure", { key: '73d4ec678359e2fe33f557ccab72fadf0146893c', class: 'avatar' }, h("img", { key: '222623088454a1cfff9a742b325fee32cdf13bf1', src: 'https://cloudfronttestebucket.s3.amazonaws.com/agent.jpg' }))), h("div", { key: '71da07ddddf76452550b90f454faf9a57d22580f', class: 'messages', ref: el => this.messagesContainer = el }, this.renderMessages(this.messages)), h("div", { key: '8732e38fe832ddc0745d000daccf513662daa619', class: 'message-box' }, h("textarea", { key: 'f596c339ba57787d18bd651dd3aa484948d8cb6b', typeof: 'text', value: this.content, onInput: (event) => this.handleChange(event), class: 'message-input', placeholder: this.translations['text?.placeholder'] || 'Digite sua mensagem ...' }), h("button", { key: 'ced6e9ca3209cd56533604a38667086e993a871a', disabled: this.disableSend, type: 'submit', class: 'message-submit', onClick: (e) => this.handleSend(e) }, this.translations['button?.send'] || 'Enviar'))), h("div", { key: 'a19dc812be9d95fdf151204c9a40bbb3345a08aa', class: "bg" })));
+        return (h("div", { key: 'd085f63587c980ac8fe67f61aa6bc5a149625934' }, h("div", { key: '8c8697ff0a6b5875ec0d53421ed0c167e5b2701e', class: 'chat' }, h("div", { key: 'fbaa4b76fb5c07c92fd298993d387f124544195b', class: 'chat-title' }, h("h1", { key: '35133c0b8172e0ae9c85170af445f7b8e7b99b93' }, "BOT Lua"), h("h2", { key: '926b8218e5cdab32b2cbb2a55b77089d164553fb' }, "Atendimento Global"), h("figure", { key: '73d4ec678359e2fe33f557ccab72fadf0146893c', class: 'avatar' }, h("img", { key: '222623088454a1cfff9a742b325fee32cdf13bf1', src: 'https://cloudfronttestebucket.s3.amazonaws.com/agent.jpg' }))), h("div", { key: '71da07ddddf76452550b90f454faf9a57d22580f', class: 'messages', ref: el => this.messagesContainer = el }, this.renderMessages(this.messages)), h("div", { key: '8732e38fe832ddc0745d000daccf513662daa619', class: 'message-box' }, h("textarea", { key: '7d42ce3b588d8be8b9ee3ab5c5d35db7644a9ba4', typeof: 'text', value: this.content, onInput: (event) => this.handleChange(event), class: 'message-input', placeholder: (this.translations) ? this.translations['text?.placeholder'] : 'Digite sua mensagem ...' }), h("button", { key: 'c92131c77378d98823f7402537e477b419620602', disabled: this.disableSend, type: 'submit', class: 'message-submit', onClick: (e) => this.handleSend(e) }, (this.translations) ? this.translations['button?.send'] : 'Enviar'))), h("div", { key: '5ebcc79e991875f39efecd5faed31161a8db0f15', class: "bg" })));
     }
 };
 ChatComponent.style = chatComponentCss;
