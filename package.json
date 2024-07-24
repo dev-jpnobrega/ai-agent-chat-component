@@ -1,6 +1,6 @@
 {
   "name": "ai-enterprise-chat-component",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "About AI Agent Chat provides a Web Component for integrating chat into your website.",
   "main": "dist/index.cjs.js",
   "exports": "./dist/esm/ai-enterprise-chat-component.js",
