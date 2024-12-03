@@ -1,6 +1,7 @@
 import { Event, Component, FunctionalComponent, Prop, h, EventEmitter, Listen, State } from '@stencil/core';
-import AIEnterpriseService from '../../service/ai-enterprise.service';
-import TranslationUtils from '../../utils/translation';
+import { AIEnterpriseService, SendMessageBody} from '../../service/ai-enterprise.service';
+import TranslationUtils from '../../helpers/translation';
+import { idGeneration } from '../../helpers/helpers';
 
 interface MessagesProps {
   messages: Message[];
@@ -57,7 +58,6 @@ const Messages: FunctionalComponent<MessagesProps> = ({ messages }) => {
   )
 };
 
-
 const service = new AIEnterpriseService({
   url: 'https://ai-enterprise-api.azurewebsites.net',
   key: 'my-key',
@@ -85,6 +85,11 @@ export class ChatComponent {
   @Prop() chatUid?: string;
 
   /**
+   * The Initial Context chat
+   */
+  @Prop() context?: string;
+
+  /**
    * The language
    */
   @Prop() language?: string;
@@ -98,12 +103,18 @@ export class ChatComponent {
   @State() disableSend: boolean = true;
 
   async componentWillLoad() {
-    this.chatUid = this.chatUid || Math.random().toString(36).substring(7);
-    const messageID = Math.random().toString(36).substring(7);
-
-
+    this.chatUid = this.chatUid || idGeneration();
+    const messageID =  idGeneration();
 
     this.translations = await TranslationUtils.fetchTranslations(this.language);
+
+    const sendBody: SendMessageBody = {
+      id: this.chatUid,
+      agentUid: this.identifier,
+      userId: this.chatUid,
+      context: this.context || '',
+      messages: [{ id: messageID, content: this.greetings || 'Hi' }],
+    }
 
     this.receiver.emit({
       id: messageID,
@@ -113,7 +124,7 @@ export class ChatComponent {
       sender: 'AI'
     });
 
-    service.send({ content: this.greetings || 'Hi' }, this.chatUid, this.identifier)
+    service.send(sendBody)
       .then((response) => {
         this.receiver.emit({
           id: messageID,
@@ -144,7 +155,7 @@ export class ChatComponent {
       ...message,
     });
 
-    const messageID = Math.random().toString(36).substring(7);
+    const messageID = idGeneration();
 
     this.receiver.emit({
       id: messageID,
@@ -153,7 +164,15 @@ export class ChatComponent {
       sender: 'AI'
     });
   
-    service.send(message, this.chatUid || '1', this.identifier)
+    const sendBody: SendMessageBody = {
+      id: this.chatUid,
+      agentUid: this.identifier,
+      userId: this.chatUid,
+      context: this.context || '',
+      messages: [{id: messageID, ...message}],
+    }
+
+    service.send(sendBody)
       .then((response) => {
         this.receiver.emit({
           id: messageID,
@@ -193,7 +212,7 @@ export class ChatComponent {
     if (!this.content) return;
 
     this.send.emit({
-      id: Math.random().toString(36).substring(7),
+      id: idGeneration(),
       content: this.content,
       date: new Date(),
       loading: false,

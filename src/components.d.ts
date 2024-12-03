@@ -12,6 +12,10 @@ export namespace Components {
          */
         "chatUid"?: string;
         /**
+          * The Initial Context chat
+         */
+        "context"?: string;
+        /**
           * The greetings
          */
         "greetings": string;
@@ -58,6 +62,10 @@ declare namespace LocalJSX {
           * The Chat identifier
          */
         "chatUid"?: string;
+        /**
+          * The Initial Context chat
+         */
+        "context"?: string;
         /**
           * The greetings
          */
