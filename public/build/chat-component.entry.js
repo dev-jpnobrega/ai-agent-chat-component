@@ -187,6 +187,7 @@ const ChatComponent = class {
         this.disableSend = true;
     }
     async componentWillLoad() {
+        this.chatUid = this.chatUid || Math.random().toString(36).substring(7);
         const messageID = Math.random().toString(36).substring(7);
         this.translations = await TranslationUtils.fetchTranslations(this.language);
         this.receiver.emit({
@@ -196,7 +197,7 @@ const ChatComponent = class {
             loading: true,
             sender: 'AI'
         });
-        service.send({ content: this.greetings || 'Hi' }, this.chatUid || '1', this.identifier)
+        service.send({ content: this.greetings || 'Hi' }, this.chatUid, this.identifier)
             .then((response) => {
             this.receiver.emit({
                 id: messageID,
@@ -277,7 +278,7 @@ const ChatComponent = class {
         }
     }
     render() {
-        return (h("div", { key: '6dbde65c6ece92b6b35f758e065d3177d4a14578', class: 'chat' }, h("div", { key: 'c8d94e20a46305353ab498a4123e79ff5e5bd6f7', class: 'chat-title' }, h("h1", { key: 'c29c3a2800a7a254b02adcdccbd69009483f9963' }, "BOT Lua"), h("h2", { key: '42c431735fe5493186acd3b958780b977dbbcb28' }, "Atendimento Global"), h("figure", { key: '40a651845a419860b2648fc7f8eca6f0f42e7924', class: 'avatar' }, h("img", { key: '1f81fc681354fc952ce9898ac673347adf6dc820', src: 'https://cloudfronttestebucket.s3.amazonaws.com/agent.jpg' }))), h("div", { key: '003968a8e937ca9a3e55528025430b7442148911', class: 'messages', ref: el => this.messagesContainer = el }, this.renderMessages(this.messages)), h("div", { key: 'd09d4f5f7d859b607eebf4719c62261fd5562954', class: 'message-box' }, h("textarea", { key: '0194876ac3bccedff1507541945dcb86404af035', typeof: 'text', value: this.content, onInput: (event) => this.handleChange(event), class: 'message-input', placeholder: (this.translations) ? this.translations['text?.placeholder'] : 'Digite sua mensagem ...' }), h("button", { key: '8fe2bae40dad86c1dc4e35dbd633084d92f3072e', disabled: this.disableSend, type: 'submit', class: 'message-submit', onClick: (e) => this.handleSend(e) }, (this.translations) ? this.translations['button?.send'] : 'Enviar'))));
+        return (h("div", { key: '96800e8dadb4231b21c2a95543f4ef52fb7ee96c', class: 'chat' }, h("div", { key: '48519023545f33e1ab73e0ec3285ee16c4d13146', class: 'chat-title' }, h("h1", { key: '60d42b975010c7fb99141b24d69f0f48b41b458f' }, "BOT Lua"), h("h2", { key: '1a2c731e14a4ae577d57f2834380960fffed2660' }, "Atendimento Global"), h("figure", { key: 'ce3bcc5e27d8a327b758a23276d4b85fc8e06baf', class: 'avatar' }, h("img", { key: '288c57d7358f4e9acdb342ac3fb9f8e1c282e011', src: 'https://cloudfronttestebucket.s3.amazonaws.com/agent.jpg' }))), h("div", { key: '9a185728fb5a8ed2d5637ca30fece13b1e568e03', class: 'messages', ref: el => this.messagesContainer = el }, this.renderMessages(this.messages)), h("div", { key: '801aa20c3cb274ff94be3fc1d3033b1912e3135a', class: 'message-box' }, h("textarea", { key: '865782d4fe7d7ab66489e9539700d66a2af16f9a', typeof: 'text', value: this.content, onInput: (event) => this.handleChange(event), class: 'message-input', placeholder: (this.translations) ? this.translations['text.placeholder'] : 'Digite sua mensagem ...' }), h("button", { key: 'a7040dc0818599ae45c69bf1b0a665ebf3d9028c', disabled: this.disableSend, type: 'submit', class: 'message-submit', onClick: (e) => this.handleSend(e) }, (this.translations) ? this.translations['button.send'] : 'Enviar'))));
     }
 };
 ChatComponent.style = chatComponentCss;

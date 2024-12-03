@@ -98,7 +98,10 @@ export class ChatComponent {
   @State() disableSend: boolean = true;
 
   async componentWillLoad() {
+    this.chatUid = this.chatUid || Math.random().toString(36).substring(7);
     const messageID = Math.random().toString(36).substring(7);
+
+
 
     this.translations = await TranslationUtils.fetchTranslations(this.language);
 
@@ -110,7 +113,7 @@ export class ChatComponent {
       sender: 'AI'
     });
 
-    service.send({ content: this.greetings || 'Hi' }, this.chatUid || '1', this.identifier)
+    service.send({ content: this.greetings || 'Hi' }, this.chatUid, this.identifier)
       .then((response) => {
         this.receiver.emit({
           id: messageID,
@@ -237,13 +240,13 @@ export class ChatComponent {
         <div class='message-box'>
           <textarea
             typeof='text'
-            value={ this.content }
+            value={ this.content } 
             onInput={ (event) => this.handleChange(event) } 
             class='message-input' 
-            placeholder={ (this.translations) ? this.translations['text?.placeholder'] : 'Digite sua mensagem ...' }>
+            placeholder={ (this.translations) ? this.translations['text.placeholder'] : 'Digite sua mensagem ...' }>
           </textarea>
           <button disabled={this.disableSend} type='submit' class='message-submit' onClick={ (e) => this.handleSend(e) }>
-            { (this.translations) ? this.translations['button?.send'] : 'Enviar' }
+            { (this.translations) ? this.translations['button.send'] : 'Enviar' }
           </button>
         </div>
       </div>
