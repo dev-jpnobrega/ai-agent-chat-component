@@ -2,8 +2,15 @@ import fetchRequest from '../helpers/fetch-request';
 
 interface SettingsService {
   url: string;
-  key: string;
+  xApiKey: string;
 }
+
+export type Agent = {
+  id: string;
+  name: string;
+  description: string;
+  urlImg: string;
+};
 
 export interface SendMessageBody {
   id: string;
@@ -20,7 +27,23 @@ export class AIEnterpriseService {
     this.settings = settings;
   }
 
-  async send(sendMessageBody: SendMessageBody): Promise<string> {
+  async getAgent(agentIdentify: string): Promise<Agent> {
+    try {
+      const result = await fetchRequest({
+        method: `GET`,
+        headers: {
+          'x-api-key': this.settings.xApiKey,
+        },
+        uri: `${this.settings.url}/workout/v1/agent/${agentIdentify}`,
+      });
+
+      return result.body;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async sendMessage(sendMessageBody: SendMessageBody): Promise<string> {
     try {
       const result = await fetchRequest({
         method: `POST`,
