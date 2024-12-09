@@ -18,7 +18,7 @@ interface Message {
   agent: Agent;
 }
 
-const Message: FunctionalComponent<Message> = ({ agent: agent, content, date, sender, loading }) => { 
+const Message: FunctionalComponent<Message> = ({ agent, content, date, sender, loading }) => { 
   const dateFormart = date.getHours() + ':' + date.getMinutes();
 
   const MessageUser = (message: Message) => {
@@ -77,28 +77,34 @@ export class ChatComponent {
    * The greetings
    */
   @Prop() greetings: string;
-
   /**
    * The Agent identifier
    */
   @Prop() identifier: string;
-
   /**
    * The Chat identifier
    */
   @Prop() chatUid?: string;
-
   /**
    * The Initial Context chat
    */
   @Prop() context?: string;
-
   /**
    * The language
    */
   @Prop() language?: string;
-  
+  /**
+   * Event emitted when a message is sent.
+   * 
+   * @event send
+   */
   @Event() send: EventEmitter;
+  /**
+   * Event emitter for the receiver event.
+   * This event is triggered when a message is received.
+   *
+   * @event receiver
+   */
   @Event() receiver: EventEmitter;
 
   @State() translations: any;

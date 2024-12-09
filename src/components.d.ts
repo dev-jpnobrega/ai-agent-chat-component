@@ -78,7 +78,15 @@ declare namespace LocalJSX {
           * The language
          */
         "language"?: string;
+        /**
+          * Event emitter for the receiver event. This event is triggered when a message is received.
+          * @event receiver
+         */
         "onReceiver"?: (event: ChatComponentCustomEvent<any>) => void;
+        /**
+          * Event emitted when a message is sent.
+          * @event send
+         */
         "onSend"?: (event: ChatComponentCustomEvent<any>) => void;
     }
     interface IntrinsicElements {
