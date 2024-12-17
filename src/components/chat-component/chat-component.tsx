@@ -64,7 +64,7 @@ const Messages: FunctionalComponent<MessagesProps> = ({ agent, messages }) => {
 
 const service = new AIEnterpriseService({
   url: 'https://ai-enterprise-api.azurewebsites.net',
-  xApiKey: '',
+  xApiKey: '9cdda224-d676-48e2-a92d-8af19d0a1a21',
 });
 
 @Component({
