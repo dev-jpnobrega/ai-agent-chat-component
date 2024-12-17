@@ -64,7 +64,7 @@ const Messages: FunctionalComponent<MessagesProps> = ({ agent, messages }) => {
 
 const service = new AIEnterpriseService({
   url: 'https://ai-enterprise-api.azurewebsites.net',
-  xApiKey: 'my-key',
+  xApiKey: '',
 });
 
 @Component({
@@ -116,8 +116,12 @@ export class ChatComponent {
   async componentWillLoad() {
     this.chatUid = this.chatUid || idGeneration();
     const messageID =  idGeneration();
+    
+    if (!this.translations)
+      this.translations = await TranslationUtils.fetchTranslations(this.language);
 
-    this.translations = await TranslationUtils.fetchTranslations(this.language);
+        if (!this.Agent?.name)
+      this.Agent = await service.getAgent(this.identifier);
 
     const sendBody: SendMessageBody = {
       id: this.chatUid,
@@ -135,10 +139,6 @@ export class ChatComponent {
       sender: 'AI'
     });
 
-    if (!this.Agent?.name) {
-      this.Agent = await service.getAgent(this.identifier);
-    }
-console.warn('this.Agent', this.Agent);
     const response = await service.sendMessage(sendBody);
 
     this.receiver.emit({
@@ -273,7 +273,7 @@ console.warn('this.Agent', this.Agent);
             value={ this.content } 
             onInput={ (event) => this.handleChange(event) } 
             class='message-input' 
-            placeholder={ (this.translations) ? this.translations['text.placeholder'] : 'Digite sua mensagem ...' }>
+            placeholder={ this.translations?.['text.placeholder'] || 'Digite sua mensagem ...' }>
           </textarea>
           <button disabled={ this.disableSend } type='submit' class='message-submit' onClick={ (e) => this.handleSend(e) }>
             { (this.translations) ? this.translations['button.send'] : 'Enviar' }
