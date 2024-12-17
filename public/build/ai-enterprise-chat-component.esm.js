@@ -47,7 +47,7 @@ const patchCloneNodeFix = (HTMLElementPrototype) => {
 
 patchBrowser().then(async (options) => {
   await globalScripts();
-  return bootstrapLazy([["chat-component",[[1,"chat-component",{"greetings":[1],"identifier":[1],"chatUid":[1,"chat-uid"],"language":[1],"translations":[32],"messages":[32],"content":[32],"disableSend":[32]},[[0,"send","sendHandler"],[0,"receiver","receiverHandler"],[0,"keydown","handleKeyDown"]]]]]], options);
+  return bootstrapLazy([["chat-component",[[1,"chat-component",{"greetings":[1],"identifier":[1],"chatUid":[1,"chat-uid"],"context":[1],"language":[1],"translations":[32],"messages":[32],"content":[32],"disableSend":[32],"Agent":[32]},[[0,"send","sendHandler"],[0,"receiver","receiverHandler"],[0,"keydown","handleKeyDown"]]]]]], options);
 });
 
 //# sourceMappingURL=ai-enterprise-chat-component.esm.js.map

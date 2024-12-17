@@ -17,11 +17,7 @@ npm install ai-enterprise-chat-component
 
 ## Usage
 
-### Simple use
-
-
-### Using with
-
+For detailed documentation on how to use the component, [docs](docs/components/chat-component/readme.md)
 
 ## Contributing
 
@@ -43,9 +39,9 @@ See the [contributing docs](CONTRIBUTING.md) for more information
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
+
 [Apache-2.0](LICENSE)
-
-
