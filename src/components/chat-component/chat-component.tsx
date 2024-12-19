@@ -117,7 +117,8 @@ export class ChatComponent {
     this.chatUid = this.chatUid || idGeneration();
     const messageID =  idGeneration();
     
-    this.translations = await TranslationUtils.fetchTranslations(this.language);
+    if (!this.translations)
+      this.translations = await TranslationUtils.fetchTranslations(this.language);
 
     if (!this.Agent?.name)
       this.Agent = await service.getAgent(this.identifier);

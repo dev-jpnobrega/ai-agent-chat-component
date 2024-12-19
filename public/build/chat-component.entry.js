@@ -149,14 +149,19 @@ const translations = {
     'pt-br': ptBrTranslations,
 };
 class TranslationUtils {
-    static async fetchTranslations(lang = `en`) {
-        const existingTranslations = JSON.parse(sessionStorage.getItem(`i18n.${lang}`));
+    static async fetchTranslations(lang = `pt-br`) {
+        const existingTranslations = JSON.parse(sessionStorage.getItem(`i18n.${lang.toLowerCase()}`));
         if (existingTranslations && Object.keys(existingTranslations).length > 0) {
             return existingTranslations;
         }
         try {
-            const translateSelected = translations[lang];
-            sessionStorage.setItem(`i18n.${lang}`, JSON.stringify(translateSelected));
+            let translateSelected = translations[lang.toLowerCase()];
+            if (!translateSelected) {
+                translateSelected = translations[`pt-br`];
+                sessionStorage.setItem(`i18n.pt-br`, JSON.stringify(translateSelected));
+                return translateSelected;
+            }
+            sessionStorage.setItem(`i18n.${lang.toLowerCase()}`, JSON.stringify(translateSelected));
             return translateSelected;
         }
         catch (exception) {
@@ -194,7 +199,7 @@ const Messages = ({ agent, messages }) => {
 };
 const service = new AIEnterpriseService({
     url: 'https://ai-enterprise-api.azurewebsites.net',
-    xApiKey: '',
+    xApiKey: '9cdda224-d676-48e2-a92d-8af19d0a1a21',
 });
 const ChatComponent = class {
     constructor(hostRef) {
@@ -322,7 +327,7 @@ const ChatComponent = class {
     }
     render() {
         var _a, _b, _c, _d;
-        return (h("div", { key: 'e4c6ccc3f07166ce7536e03ad5ba446c582d2c4c', class: 'chat' }, h("div", { key: '4cda725aa2fb37d2a97d601a2f819ab6ad6253d7', class: 'chat-title' }, h("h1", { key: '75f02b21c84fe4cd15d521a2fafb8ac8836a9fcf' }, ((_a = this.Agent) === null || _a === void 0 ? void 0 : _a.name) || 'BOT'), h("h2", { key: '57325cff65b6cc72b2d276fb9ea3ade3a8a50904' }, ((_b = this.Agent) === null || _b === void 0 ? void 0 : _b.description) || 'IA Assistent'), h("figure", { key: 'ac3ec3942808beee6b74a03f7fc167c2fcbb27d0', class: 'avatar' }, h("img", { key: '1450aa225985443c9f75b8be09715cc5c036cd75', src: ((_c = this.Agent) === null || _c === void 0 ? void 0 : _c.urlImg) || 'https://cloudfronttestebucket.s3.amazonaws.com/agent.jpg' }))), h("div", { key: '7463a3d2e2df719ed7330ab55da95ef8415c3c28', class: 'messages', ref: el => this.messagesContainer = el }, this.renderMessages(this.messages)), h("div", { key: '8708d2ac1a81e3a9c9fe51f3a5356d4350548233', class: 'message-box' }, h("textarea", { key: 'aa5198354001c1def796abcd16e0c476821b94b7', typeof: 'text', value: this.content, onInput: (event) => this.handleChange(event), class: 'message-input', placeholder: ((_d = this.translations) === null || _d === void 0 ? void 0 : _d['text.placeholder']) || 'Digite sua mensagem ...' }), h("button", { key: '8820a9a0497a613dc2dad758b94b6aff358004bf', disabled: this.disableSend, type: 'submit', class: 'message-submit', onClick: (e) => this.handleSend(e) }, (this.translations) ? this.translations['button.send'] : 'Enviar'))));
+        return (h("div", { key: 'e84c222f61966eda06acc14380108973f08a7b71', class: 'chat' }, h("div", { key: '23614017f969cbbae83a4fe230de734ed87f5aee', class: 'chat-title' }, h("h1", { key: 'd4a78dd080f6503571cda366adfdf0b3fe367f6d' }, ((_a = this.Agent) === null || _a === void 0 ? void 0 : _a.name) || 'BOT'), h("h2", { key: 'f002c4cd504785944a52c58271a3ecf7b5392159' }, ((_b = this.Agent) === null || _b === void 0 ? void 0 : _b.description) || 'IA Assistent'), h("figure", { key: 'f4f75d009128e7ebb6b541c1fc714a1acb46c2af', class: 'avatar' }, h("img", { key: 'b8429979e06879d4e8f89eb1d791bddc02dc2422', src: ((_c = this.Agent) === null || _c === void 0 ? void 0 : _c.urlImg) || 'https://cloudfronttestebucket.s3.amazonaws.com/agent.jpg' }))), h("div", { key: 'c8a1befb4642b487a5e444b9fca3353195b2d529', class: 'messages', ref: el => this.messagesContainer = el }, this.renderMessages(this.messages)), h("div", { key: '9f5af860ca297a7cab3d26706122cccbbea16f35', class: 'message-box' }, h("textarea", { key: 'e63c4abbadcc3cd107d0ca8554000a83c3c65636', typeof: 'text', value: this.content, onInput: (event) => this.handleChange(event), class: 'message-input', placeholder: ((_d = this.translations) === null || _d === void 0 ? void 0 : _d['text.placeholder']) || 'Digite sua mensagem ...' }), h("button", { key: '64ef24af32662994422ea4c6b04ffc79668461f7', disabled: this.disableSend, type: 'submit', class: 'message-submit', onClick: (e) => this.handleSend(e) }, (this.translations) ? this.translations['button.send'] : 'Enviar'))));
     }
 };
 ChatComponent.style = chatComponentCss;
